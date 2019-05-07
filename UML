@@ -1,0 +1,44 @@
+@startuml
+
+class GameLoop {
+  -<Vector> objects
+  +main()
+  +run()
+}
+
+abstract class Object {
+  -Movement
+  +update()
+  +render()
+}
+
+class Movement {
+  -x,
+  -y,
+  -vx,
+  -vy,
+  -ax,
+  -ay,
+  +update()
+}
+
+class Ball {
+  -radius
+}
+
+class Cannon {
+  -angle
+  -power
+}
+
+class Gravity {
+  -gravityVal
+  +updateMovement()
+}
+
+Object <|-- Ball
+Object <|-- Cannon
+Object *-- Movement
+GameLoop *-- Object
+
+@enduml
