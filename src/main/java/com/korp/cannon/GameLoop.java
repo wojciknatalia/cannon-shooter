@@ -1,11 +1,14 @@
 package com.korp.cannon;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GameLoop extends Canvas{
 
     private boolean running = false;
     private final int FPS = 60;
+
+    ArrayList<Bullet> objects = new ArrayList<Bullet>();
 
     public GameLoop(){
         new Window(800, 640, "Cannon Shooter", this);
@@ -18,9 +21,15 @@ public class GameLoop extends Canvas{
     }
 
     private void update(double delta){
+        for(Bullet obj: objects){
+            obj.update(delta);
+        }
     }
 
     private void render(){
+        for(Bullet obj: objects){
+            obj.render();
+        }
 
     }
 
