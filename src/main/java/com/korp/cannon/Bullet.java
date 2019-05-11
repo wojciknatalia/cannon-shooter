@@ -1,14 +1,20 @@
 package com.korp.cannon;
 
+import java.awt.*;
+
 public abstract class Bullet {
     public double x;
     public double y;
     public double vx;
     public double vy;
-    public double ax;
-    public double ay;
 
-    public abstract void update(double delta);
-    public abstract void render();
+    public abstract void update();
+    public abstract void render(Graphics g);
 
+    public Bullet(double x, double y, double vx, double vy){
+        this.x = x;
+        this.y = y;
+        this.vx = vx;
+        this.vy = vy;
+    }
 }

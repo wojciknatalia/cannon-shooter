@@ -1,17 +1,20 @@
 package com.korp.cannon;
 
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class GameLoop extends Canvas{
 
     private boolean running = false;
-    private final int FPS = 60;
+    private final int FPS = 30;
 
-    ArrayList<Bullet> objects = new ArrayList<Bullet>();
+    LinkedList<Bullet> objects = new LinkedList<Bullet>();
 
     public GameLoop(){
         new Window(800, 640, "Cannon Shooter", this);
+        objects.push(new Test(300,300,1,0));
     }
 
 
@@ -20,17 +23,29 @@ public class GameLoop extends Canvas{
         loop();
     }
 
-    private void update(double delta){
+    private void update(){
         for(Bullet obj: objects){
-            obj.update(delta);
+            obj.update();
         }
     }
 
     private void render(){
-        for(Bullet obj: objects){
-            obj.render();
+        BufferStrategy bs = this.getBufferStrategy();
+        if(bs == null){
+            this.createBufferStrategy(3);
+            return;
         }
 
+        Graphics g = bs.getDrawGraphics();
+        g.setColor(Color.pink);
+        g.fillRect(0,0, 800, 640);
+
+        for(Bullet obj: objects){
+            obj.render(g);
+        }
+
+        g.dispose();
+        bs.show();
     }
 
     private void userInput(){
@@ -41,15 +56,25 @@ public class GameLoop extends Canvas{
         long lastTick = System.nanoTime();
         double ns = 1000000000 / FPS;
         double delta = 0;
+        long timer = System.currentTimeMillis();
+        int frames = 0;
         while(running){
             long currTick = System.nanoTime();
-            delta = (currTick - lastTick) / ns;
+            delta += (currTick - lastTick) / ns;
             lastTick = currTick;
-
+            while(delta >= 1){
+                update();
+                delta--;
+                render();
+            }
             userInput();
-            update(delta);
-            render();
+            frames++;
 
+            if(System.currentTimeMillis() - timer > 1000){
+                timer += 1000;
+                System.out.println("FPS: "+ frames);
+                frames = 0;
+            }
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
