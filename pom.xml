@@ -16,7 +16,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
-    <lwjgl.version>3.0.0a</lwjgl.version>
   </properties>
 
   <dependencies>
@@ -26,13 +25,11 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.lwjgl/lwjgl -->
     <dependency>
-	    <groupId>org.lwjgl</groupId>
-	    <artifactId>lwjgl</artifactId>
-	    <version>3.0.0a</version>
+        <groupId>de.gurkenlabs</groupId>
+        <artifactId>litiengine</artifactId>
+        <version>0.4.17</version>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -76,6 +73,14 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.2.1</version>
+            <configuration>
+                <mainClass>com.korp.cannon.App</mainClass>
+            </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
