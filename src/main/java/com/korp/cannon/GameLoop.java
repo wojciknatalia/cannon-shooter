@@ -2,17 +2,50 @@ package com.korp.cannon;
 
 import java.awt.*;
 
-public class GameLoop extends Canvas implements Runnable {
+public class GameLoop extends Canvas{
+
+    private boolean running = false;
+    private final int FPS = 60;
 
     public GameLoop(){
         new Window(800, 640, "Cannon Shooter", this);
     }
 
-    public synchronized void start(){
+
+    public void run(){
+        running = true;
+        loop();
+    }
+
+    private void update(double delta){
+    }
+
+    private void render(){
 
     }
 
-    public void run(){
+    private void userInput(){
 
+    }
+
+    private void loop(){
+        long lastTick = System.nanoTime();
+        double ns = 1000000000 / FPS;
+        double delta = 0;
+        while(running){
+            long currTick = System.nanoTime();
+            delta = (currTick - lastTick) / ns;
+            lastTick = currTick;
+
+            userInput();
+            update(delta);
+            render();
+
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
