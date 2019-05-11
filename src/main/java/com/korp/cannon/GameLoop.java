@@ -10,17 +10,25 @@ public class GameLoop extends Canvas{
     private boolean running = false;
     private final int FPS = 30;
 
-    LinkedList<Bullet> objects = new LinkedList<Bullet>();
+    private LinkedList<Bullet> objects = new LinkedList<Bullet>();
 
     public GameLoop(){
         new Window(800, 640, "Cannon Shooter", this);
-        objects.push(new Test(300,300,1,0));
+        addObject(new Test(300,300,1,0));
     }
 
 
     public void run(){
         running = true;
         loop();
+    }
+
+    public void addObject(Bullet obj){
+        objects.push(obj);
+    }
+
+    public void delObject(Bullet obj){
+        objects.remove(obj);
     }
 
     private void update(){
