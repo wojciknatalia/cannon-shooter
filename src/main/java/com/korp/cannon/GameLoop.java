@@ -24,7 +24,6 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     public GameLoop(){
         new Window(800, 640, "Cannon Shooter", this);
         cannon = new Cannon(0,500, 50, 10);  //od 0 do -90
-        addObject(new Test(0,500,5,-3));
         addMouseListener(this);
         addMouseMotionListener(this);
         addObject(new Test(cannon.x_end,cannon.y_end,5,-3));
