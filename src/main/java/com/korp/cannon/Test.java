@@ -9,9 +9,9 @@ public class Test extends Bullet{
     }
     @Override
     public void update() {
-        x+=vx;
-        y+=vy;
-        vy -= 0.01;
+        super.update();
+
+        vy -= 0.03;
         if(x < 0){
             x=0;
         }

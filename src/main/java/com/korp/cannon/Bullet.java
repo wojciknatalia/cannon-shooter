@@ -8,7 +8,11 @@ public abstract class Bullet {
     public double vx;
     public double vy;
 
-    public abstract void update();
+    public void update(){
+        x += vx;
+        y += vy;
+    }
+
     public abstract void render(Graphics g);
 
     public Bullet(double x, double y, double vx, double vy){
@@ -17,4 +21,5 @@ public abstract class Bullet {
         this.vx = vx;
         this.vy = vy;
     }
+
 }
