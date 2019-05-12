@@ -11,10 +11,12 @@ public class GameLoop extends Canvas{
     private final int FPS = 30;
 
     private LinkedList<Bullet> objects = new LinkedList<Bullet>();
+    private Cannon cannon;
 
     public GameLoop(){
         new Window(800, 640, "Cannon Shooter", this);
-        addObject(new Test(300,300,1,0));
+        cannon = new Cannon(10,500, 50, 10, 45);
+        addObject(new Test(0,500,5,-3));
     }
 
 
@@ -35,6 +37,7 @@ public class GameLoop extends Canvas{
         for(Bullet obj: objects){
             obj.update();
         }
+        cannon.update();
     }
 
     private void render(){
@@ -51,6 +54,7 @@ public class GameLoop extends Canvas{
         for(Bullet obj: objects){
             obj.render(g);
         }
+        cannon.render(g);
 
         g.dispose();
         bs.show();
