@@ -12,7 +12,7 @@ public class Slider {
     private int height = 5;
     private String label;
     private int sliderX;
-    private int sliderWidth = 5;
+    private int sliderWidth = 10;
     private int sliderHeight = 20;
     private boolean sliderGrapped = false;
 
