@@ -17,7 +17,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     private boolean running = false;
     private final int FPS = 30;
     public final static int WIDTH = 800;
-    public final static int HEIGHT = 600;
+    public final static int HEIGHT = 700;
 
     private LinkedList<Bullet> objects = new LinkedList<Bullet>();
     private Cannon cannon;
