@@ -11,6 +11,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 public class GameLoop extends Canvas implements MouseListener, MouseMotionListener, KeyListener {
 
@@ -47,14 +48,39 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         objects.remove(obj);
     }
 
+    public void collideEffect(){
+	    for(Bullet A: objects){
+		    for(Bullet B: objects){
+			    if(A.equals(B)) continue;
+
+			    Vector2D vecA = new Vector2D(A.x, A.y);
+			    Vector2D vecB = new Vector2D(B.x, B.y);
+			    Vector2D dist = vecA.subtract(vecB);
+			    if(dist.getNorm() > A.radius + B.radius)
+				    continue;
+			    dist = dist.normalize();
+			    double dotA = vecA.dotProduct(dist);
+			    double dotB = vecB.dotProduct(dist);
+			    double mn = dotA - dotB;
+			    
+			    A.vx += dist.getX()*mn/70;
+			    A.vy += dist.getY()*mn/70;
+			    B.vx -= dist.getX()*mn/70;
+			    B.vy -= dist.getY()*mn/70;
+		    }
+	    }
+
+    }
+
     private void update(){
         for(Bullet obj: objects){
             obj.update();
         }
+	collideEffect();
         cannon.update();
     }
 
-    private void render(){
+    private synchronized void render(){
         BufferStrategy bs = this.getBufferStrategy();
         if(bs == null){
             this.createBufferStrategy(3);

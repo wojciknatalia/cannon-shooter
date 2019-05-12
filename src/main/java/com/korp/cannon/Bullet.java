@@ -7,6 +7,7 @@ public abstract class Bullet {
     public double y;
     public double vx;
     public double vy;
+    public int radius = 0;
 
     public void update(){
         x += vx;
