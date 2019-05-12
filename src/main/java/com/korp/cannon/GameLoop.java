@@ -22,13 +22,13 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 
     private LinkedList<Bullet> objects = new LinkedList<Bullet>();
     private Cannon cannon;
-    private Slider angleSlider=new Slider(50,80,157,0,"Angle");
+    private Slider angleSlider=new Slider(50,80,150,0,"Angle");
     private Slider sizeSlider=new Slider(50, 140, 0, 75, "Size");
-    private Slider powerSlider=new Slider(50, 200, 150, 0, "Power");
+    private Slider powerSlider=new Slider(50, 200, 10, 0, "Power");
 
     public GameLoop(){
         new Window(WIDTH, HEIGHT, "Cannon Shooter", this);
-        cannon = new Cannon(100,600, 50, 10, this);  //od 0 do -90
+        cannon = new Cannon(100,500, 50, 10, this);  //od 0 do -90
         addMouseListener(this);
         addMouseMotionListener(this);
         addKeyListener(this);
@@ -104,7 +104,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         powerSlider.render(g);
 
         //Cannon
-        cannon.render(g);
+        g=cannon.draw(g,angleSlider.getVal(),sizeSlider.getVal(), powerSlider.getVal());
 
 
 
