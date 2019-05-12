@@ -12,6 +12,8 @@ public class Cannon {
     public double h;
     public double theta;
 
+    public double x_end;  //!! muszą być double bo int'y dają silnie złe wyniki
+    public double y_end;
 
     public Cannon(double x, double y, double width, double height) {
         this.x = x;
@@ -19,6 +21,7 @@ public class Cannon {
         w = width;
         h = height;
         theta = -45;
+        EndCoordinates();
     }
 
     public void update() {
@@ -34,9 +37,16 @@ public class Cannon {
         g2.setColor(Color.black);
         g2.rotate(Math.toRadians(theta),x,y);
         g2.fillRect((int) x, (int) y, (int)w, (int)h);
+        AffineTransform af = g2.getTransform();
+        EndCoordinates();
     }
 
     public void userinput(double angle){
         theta = angle;
+    }
+
+    public void EndCoordinates(){
+        x_end = (w * Math.cos(-Math.toRadians(theta)) + x);
+        y_end = (y + Math.tan(Math.toRadians(theta)) * x_end); //!!nie wolno rzutować x_end do int'a
     }
 }
