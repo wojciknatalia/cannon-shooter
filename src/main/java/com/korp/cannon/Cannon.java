@@ -15,17 +15,19 @@ public class Cannon {
     public double x_end;  //!! muszą być double bo int'y dają silnie złe wyniki
     public double y_end;
 
-    public Cannon(double x, double y, double width, double height) {
+    private GameLoop loop;
+
+    public Cannon(double x, double y, double width, double height, GameLoop loop) {
         this.x = x;
         this.y = y;
         w = width;
         h = height;
         theta = -45;
         EndCoordinates();
+        this.loop = loop;
     }
 
     public void update() {
-
     }
 
     public void render(Graphics g) {
@@ -37,16 +39,19 @@ public class Cannon {
         g2.setColor(Color.black);
         g2.rotate(Math.toRadians(theta),x,y);
         g2.fillRect((int) x, (int) y, (int)w, (int)h);
-        AffineTransform af = g2.getTransform();
+    }
+
+    public void setAngle(double angle){
+        theta=angle;
         EndCoordinates();
     }
 
-    public void userinput(double angle){
-        theta = angle;
+    public void EndCoordinates(){
+        x_end = Math.cos(Math.toRadians(theta)) * w + x;
+        y_end = Math.sin(Math.toRadians(theta)) * w + y;
     }
 
-    public void EndCoordinates(){
-        x_end = (w * Math.cos(-Math.toRadians(theta)) + x);
-        y_end = (y + Math.tan(Math.toRadians(theta)) * x_end); //!!nie wolno rzutować x_end do int'a
+    public void shoot(){
+        loop.addObject(new Test(x_end,y_end,5,0));
     }
 }

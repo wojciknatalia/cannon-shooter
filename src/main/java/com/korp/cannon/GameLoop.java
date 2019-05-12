@@ -3,14 +3,16 @@ package com.korp.cannon;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class GameLoop extends Canvas implements MouseListener, MouseMotionListener {
+public class GameLoop extends Canvas implements MouseListener, MouseMotionListener, KeyListener {
 
     private boolean running = false;
     private final int FPS = 30;
@@ -23,10 +25,10 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 
     public GameLoop(){
         new Window(800, 640, "Cannon Shooter", this);
-        cannon = new Cannon(0,500, 50, 10);  //od 0 do -90
+        cannon = new Cannon(100,600, 50, 10, this);  //od 0 do -90
         addMouseListener(this);
         addMouseMotionListener(this);
-        addObject(new Test(cannon.x_end,cannon.y_end,5,-3));
+        addKeyListener(this);
     }
 
 
@@ -83,7 +85,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     }
 
     private void userInput(){
-
+        
     }
 
     private void loop(){
@@ -151,4 +153,17 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     public void mouseReleased(MouseEvent e) {}
     @Override
     public void mousePressed(MouseEvent e) {}
+    @Override
+    public void keyTyped(KeyEvent e) {}
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch(e.getKeyChar()){
+            case KeyEvent.VK_SPACE:
+                cannon.shoot();
+                break;
+        }
+    }
+    @Override
+    public void keyReleased(KeyEvent e) {}
+
 }
