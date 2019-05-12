@@ -15,7 +15,7 @@ public class GameLoop extends Canvas{
 
     public GameLoop(){
         new Window(800, 640, "Cannon Shooter", this);
-        cannon = new Cannon(10,500, 50, 10, 45);
+        cannon = new Cannon(0,500, 50, 10);  //od 0 do -90
         addObject(new Test(0,500,5,-3));
     }
 

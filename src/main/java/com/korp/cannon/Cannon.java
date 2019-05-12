@@ -13,12 +13,12 @@ public class Cannon {
     public double theta;
 
 
-    public Cannon(double x, double y, double width, double height, double angle) {
+    public Cannon(double x, double y, double width, double height) {
         this.x = x;
         this.y = y;
         w = width;
         h = height;
-        theta = angle;
+        theta = -45;
     }
 
     public void update() {
@@ -26,14 +26,6 @@ public class Cannon {
     }
 
     public void render(Graphics g) {
-        /*Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
-        AffineTransform transform = new AffineTransform();
-        transform.rotate(theta, x, y);
-        Shape rotatedRect = transform.createTransformedShape(rect);
-        Graphics2D graphics = (Graphics2D)g;
-        graphics.setPaint(Color.BLACK);
-        graphics.draw(rotatedRect);*/
-
         if(theta<  -90)
             theta = -90;
         if(theta  > 0)
@@ -42,5 +34,9 @@ public class Cannon {
         g2.setColor(Color.black);
         g2.rotate(Math.toRadians(theta),x,y);
         g2.fillRect((int) x, (int) y, (int)w, (int)h);
+    }
+
+    public void userinput(double angle){
+        theta = angle;
     }
 }
