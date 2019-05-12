@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GameLoop extends Canvas implements MouseListener, MouseMotionListener, KeyListener {
 
@@ -20,7 +21,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     public final static int WIDTH = 800;
     public final static int HEIGHT = 700;
 
-    private LinkedList<Bullet> objects = new LinkedList<Bullet>();
+    private CopyOnWriteArrayList<Bullet> objects = new CopyOnWriteArrayList<Bullet>();
     private Cannon cannon;
     private Slider angleSlider=new Slider(50,80,90,0,"Angle");
     private Slider sizeSlider=new Slider(50, 140, 0, 75, "Size");
@@ -41,7 +42,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     }
 
     public void addObject(Bullet obj){
-        objects.push(obj);
+        objects.add(obj);
     }
 
     public void delObject(Bullet obj){
@@ -56,8 +57,13 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 			    Vector2D vecA = new Vector2D(A.x, A.y);
 			    Vector2D vecB = new Vector2D(B.x, B.y);
 			    Vector2D dist = vecA.subtract(vecB);
+
 			    if(dist.getNorm() > A.radius + B.radius)
 				    continue;
+
+			    if(dist.getX() == 0 && dist.getY() == 0)	
+				    dist = new Vector2D(1,0);
+
 			    dist = dist.normalize();
 			    double dotA = vecA.dotProduct(dist);
 			    double dotB = vecB.dotProduct(dist);
@@ -195,3 +201,4 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     public void keyReleased(KeyEvent e) {}
 
 }
+
