@@ -16,6 +16,8 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 
     private boolean running = false;
     private final int FPS = 30;
+    public final static int WIDTH = 800;
+    public final static int HEIGHT = 600;
 
     private LinkedList<Bullet> objects = new LinkedList<Bullet>();
     private Cannon cannon;
@@ -24,7 +26,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     private Slider powerSlider=new Slider(50, 200, 150, 0, "Power");
 
     public GameLoop(){
-        new Window(800, 640, "Cannon Shooter", this);
+        new Window(WIDTH, HEIGHT, "Cannon Shooter", this);
         cannon = new Cannon(100,600, 50, 10, this);  //od 0 do -90
         addMouseListener(this);
         addMouseMotionListener(this);
@@ -63,7 +65,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 
         //Background
         g.setColor(Color.pink);
-        g.fillRect(0,0, 800, 640);
+        g.fillRect(0,0, WIDTH, HEIGHT);
 
         //Bullet
         for(Bullet obj: objects){
