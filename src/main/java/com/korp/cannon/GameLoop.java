@@ -22,7 +22,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 
     private LinkedList<Bullet> objects = new LinkedList<Bullet>();
     private Cannon cannon;
-    private Slider angleSlider=new Slider(50,80,150,0,"Angle");
+    private Slider angleSlider=new Slider(50,80,90,0,"Angle");
     private Slider sizeSlider=new Slider(50, 140, 0, 75, "Size");
     private Slider powerSlider=new Slider(50, 200, 10, 0, "Power");
 

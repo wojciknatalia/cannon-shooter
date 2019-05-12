@@ -79,8 +79,8 @@ public class Cannon {
 
     public void shoot(){
         double powerX = power * Math.cos(Math.toRadians(theta));
-        double powerY = power * Math.sin(Math.toRadians(theta));
-        loop.addObject(new Test(x_end,y_end,powerX,powerY));
+        double powerY = power * Math.sin(Math.toRadians(theta)); //do góry
+        loop.addObject(new Test(x_end,y_end,-powerX,-powerY));
     }
 
     private int[] rotateXY(int x, int y, int angle, int cx, int cy) {
