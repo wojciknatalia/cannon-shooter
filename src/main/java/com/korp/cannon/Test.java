@@ -10,15 +10,7 @@ public class Test extends Bullet{
     @Override
     public void update() {
         super.update();
-
-        vy -= 0.03;
-        if(x < 0){
-            x=0;
-        }
-        if(y < 0){
-            y=0;
-        }
-
+        vy += 0.1;
     }
 
     @Override

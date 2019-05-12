@@ -52,6 +52,9 @@ public class Cannon {
     }
 
     public void shoot(){
-        loop.addObject(new Test(x_end,y_end,5,0));
+        double power = 5;
+        double powerX = power * Math.cos(Math.toRadians(theta));
+        double powerY = power * Math.sin(Math.toRadians(theta));
+        loop.addObject(new Test(x_end,y_end,powerX,powerY));
     }
 }
