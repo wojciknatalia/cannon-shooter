@@ -44,7 +44,7 @@ class Slider {
   -max
   -width
   -height
-  -lbel
+  -label
   -sliderX
   -sliderWidth
   -sliderHeight
