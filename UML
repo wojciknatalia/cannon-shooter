@@ -1,20 +1,26 @@
 @startuml
 
 class GameLoop {
-  -<Vector> Bullet
-  -Cannon
-  +main()
+  -<List> Element
+  +render(Element)
   +userInput()
   +run()
 }
 
+class Render {
+  +render()
+}
+
 abstract class Bullet {
+  +update()
+  +render()
+}
+
+abstract class Element {
   -x,
   -y,
   -vx,
   -vy,
-  -ax,
-  -ay,
   +update()
   +render()
 }
@@ -28,13 +34,30 @@ class Cannon {
   -power
 }
 
-class Gravity {
-  -gravityVal
-  +updateMovement()
+ class  Gravity {
+  -{static} gravityVal
+  +{static} updateMovement()
+}
+
+class Slider {
+  -min
+  -max
+  -width
+  -height
+  -lbel
+  -sliderX
+  -sliderWidth
+  -sliderHeight
+  -sliderGrapped
+  +render()
+  +getVal()
 }
 
 Bullet <|-- Ball
-GameLoop *-- Bullet
-GameLoop *-- Cannon
+GameLoop *-- Render
+GameLoop *-- Element
+Element *-- Bullet
+Element *-- Slider
+Element *-- Cannon
 
 @enduml
