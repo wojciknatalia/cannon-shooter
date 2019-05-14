@@ -8,7 +8,7 @@ class GameLoop {
 }
 
 class Render {
-  +render()
+  +render(Element)
 }
 
 abstract class Bullet {
@@ -32,6 +32,8 @@ class Ball {
 class Cannon {
   -angle
   -power
+  +render()
+  +set()
 }
 
  class  Gravity {
