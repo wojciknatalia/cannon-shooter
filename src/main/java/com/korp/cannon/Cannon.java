@@ -34,67 +34,43 @@ public class Cannon {
         power=2;
     }
 
-    public Graphics draw(Graphics g, int angle, int size, int power){
-        this.theta=angle;
-        this.size=size;
-        this.power=power;
-
-        g=render(g);
-        return g;
+    public void set(int angle, int size, int power){
+        theta=angle;
+        this.power = power;
+        this.size = size;
+        h = size*1.5;
+        w = size*5;
     }
 
     public void update() {
 
     }
 
-    public Graphics render(Graphics g) {
-        //== rotate
-        int xPoly[] = {(int)x, (int)(x + w), (int)(x + w), (int)x};
-        int yPoly[] = {(int)y, (int)y, (int)(y + diameter),(int)(y + diameter)};
-        int i;
-        for (i = 0; i < xPoly.length; i++){
-            int newXY[] = rotateXY(xPoly[i], yPoly[i], (int)theta, (int)x, (int)(y + diameter));
-            xPoly[i] = newXY[0];
-            yPoly[i] = newXY[1];
-        }
-        for (i = 0; i < xPoly.length; i++){
-            yPoly[i] = yPoly[i] + (int)y + 100 - yPoly[3]; //keeps it fixed to the corner
-        }
-
-        x_end = xPoly[1];
-        y_end = yPoly[1];
-        x_end += xPoly[2] - xPoly[1] - 2;
-
+    public void render(Graphics g) {
+        if(theta<  -90)
+            theta = -90;
+        if(theta  > 0)
+            theta = 0;
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.black);
-        Polygon poly = new Polygon(xPoly, yPoly, xPoly.length);
-        g2.fillPolygon(poly);
-
-        return g;
+        g2.rotate(Math.toRadians(theta),x,y);
+        g2.fillRect((int) x, (int) y, (int)w, (int)h);
+        EndCoordinates();
+        System.out.println(x);
     }
 
     public void setAngle(double angle){
-        theta=angle;
     }
 
     public void shoot(){
         double powerX = power * Math.cos(Math.toRadians(theta));
         double powerY = power * Math.sin(Math.toRadians(theta)); //do góry
-        loop.addObject(new Test(x_end,y_end,-powerX,-powerY));
+        loop.addObject(new Test(x_end,y_end,-powerX,-powerY, size));
     }
 
-    private int[] rotateXY(int x, int y, int angle, int cx, int cy) {
-
-        double tempX = x - cx;
-        double tempY = y - cy;
-
-        double rotatedX = tempX*Math.cos((double) angle / 100) - tempY*Math.sin((double) angle / 100);
-        double rotatedY = tempX*Math.sin((double) angle / 100) + tempY*Math.cos((double) angle / 100);
-
-        x = (int) (rotatedX + cx);
-        y = (int) (rotatedY + cy);
-        return new int[] {x, y};
-
-    }
+     public void EndCoordinates(){
+              x_end = Math.cos(Math.toRadians(theta)) * w + x;
+              y_end = Math.sin(Math.toRadians(theta)) * w + y;
+     }
 
 }

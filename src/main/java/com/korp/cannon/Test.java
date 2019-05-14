@@ -4,9 +4,9 @@ import java.awt.*;
 
 public class Test extends Bullet{
 
-    public Test(double x, double y, double vx, double vy){
+    public Test(double x, double y, double vx, double vy, int size){
         super(x, y, vx, vy);
-	radius = 20;
+	radius = size;
     }
     @Override
     public void update() {

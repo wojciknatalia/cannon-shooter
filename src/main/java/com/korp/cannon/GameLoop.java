@@ -82,7 +82,8 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         for(Bullet obj: objects){
             obj.update();
         }
-	collideEffect();
+        collideEffect();
+        cannon.set(angleSlider.getVal(), sizeSlider.getVal(), powerSlider.getVal());
         cannon.update();
     }
 
@@ -109,9 +110,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         sizeSlider.render(g);
         powerSlider.render(g);
 
-        //Cannon
-        g=cannon.draw(g,angleSlider.getVal(),sizeSlider.getVal(), powerSlider.getVal());
-
+        cannon.render(g);
 
 
         g.dispose();
