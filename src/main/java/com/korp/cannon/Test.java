@@ -10,13 +10,14 @@ public class Test extends Bullet{
     }
 
     @Override
-    public void shoot(){};
+    public void shoot(){}
 
     @Override
-    public void update() {
-        super.update();
+    public void update(int angle, int size, int power) {
+        super.update(angle, size, power);
         vy += 0.1;
     }
+
 
     @Override
     public void render(Graphics g) {

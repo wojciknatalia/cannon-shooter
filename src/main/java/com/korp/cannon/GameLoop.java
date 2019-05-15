@@ -22,23 +22,22 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     public final static int HEIGHT = 600;
 
     private CopyOnWriteArrayList<Element> objects = new CopyOnWriteArrayList<Element>();
-    private Cannon cannon;
+    //private Cannon cannon;
     private Slider angleSlider=new Slider(50,80,90,0,"Angle");
     private Slider sizeSlider=new Slider(50, 140, 0, 75, "Size");
     private Slider powerSlider=new Slider(50, 200, 10, 0, "Power");
 
     public GameLoop(){
         new Window(WIDTH, HEIGHT, "Cannon Shooter", this);
-        cannon = new Cannon(100,500, 50, 10, this);  //od 0 do -90
-        //addCannon();
+        //cannon = new Cannon(100,500, 50, 10, this);  //od 0 do -90
+        addCannon();
         addMouseListener(this);
         addMouseMotionListener(this);
         addKeyListener(this);
     }
 
     private void addCannon(){
-        Cannon cannon = new Cannon(100,500, 50, 10, this);
-        cannon.theta = -20;
+        Element cannon = new Cannon(100,500, 50, 10, this);
         objects.add(cannon);
     }
     private void shoot(){
@@ -51,11 +50,11 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         loop();
     }
 
-    public void addObject(Bullet obj){
+    public void addObject(Element obj){
         objects.add(obj);
     }
 
-    public void delObject(Bullet obj){
+    public void delObject(Element obj){
         objects.remove(obj);
     }
 
@@ -85,16 +84,14 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 			    B.vy -= dist.getY()*mn/70;
 		    }
 	    }
-
     }*/
 
     private void update(){
         for(Element obj: objects){
-            obj.update();
+            obj.update(angleSlider.getVal(), sizeSlider.getVal(), powerSlider.getVal());
         }
         //collideEffect();
-        cannon.set(angleSlider.getVal(), sizeSlider.getVal(), powerSlider.getVal());
-        cannon.update();
+        //cannon.update(angleSlider.getVal(), sizeSlider.getVal(), powerSlider.getVal());
     }
 
     private synchronized void render(){
@@ -110,17 +107,17 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         g.setColor(Color.pink);
         g.fillRect(0,0, WIDTH, HEIGHT);
 
-        //Bullet
-        for(Element obj: objects){
-            obj.render(g);
-        }
-
         //Sliders
         angleSlider.render(g);
         sizeSlider.render(g);
         powerSlider.render(g);
 
-        cannon.render(g);
+        //Bullet
+        for(Element obj: objects){
+            obj.render(g);
+        }
+
+        //cannon.render(g);
 
 
         g.dispose();
@@ -203,7 +200,8 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyChar()){
             case KeyEvent.VK_SPACE:
-                cannon.shoot();
+                shoot();
+                //cannon.shoot();
                 break;
         }
     }

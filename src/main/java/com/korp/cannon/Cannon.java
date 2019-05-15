@@ -8,10 +8,6 @@ import java.awt.geom.Rectangle2D;
 
 public class Cannon extends Element{
 
-    public double x;
-    public double y;
-    public double w;
-    public double h;
     public double theta;
     private int size;
     private int power;
@@ -29,25 +25,24 @@ public class Cannon extends Element{
 
     public Cannon(double x, double y, double width, double height, GameLoop loop) {
         super(x,y,width,height,loop);
-        this.x = x;
-        this.y = y;
-        w = width;
-        h = height;
         this.loop = loop;
         power=2;
-        //theta = angle;
     }
 
     public void set(int angle, int size, int power){
         theta=angle;
         this.power = power;
         this.size = size;
-        h = size*1.5;
-        w = size*5;
+        this.height = size*1.5;
+        this.width = size*5;
     }
 
-    public void update() {
-
+    public void update(int angle, int size, int power){
+        theta=angle;
+        this.power = power;
+        this.size = size;
+        this.height = size*1.5;
+        this.width = size*5;
     }
 
     public void render(Graphics g) {
@@ -58,7 +53,7 @@ public class Cannon extends Element{
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.black);
         g2.rotate(Math.toRadians(theta),x,y);
-        g2.fillRect((int) x, (int) y, (int)w, (int)h);
+        g2.fillRect((int) x, (int) y, (int)this.width, (int)this.height);
         EndCoordinates();
         //System.out.println(x);
     }
@@ -68,12 +63,12 @@ public class Cannon extends Element{
 
     public void shoot(){
         double powerX = power * Math.cos(Math.toRadians(theta));
-        double powerY = power * Math.sin(Math.toRadians(theta)); //do góry
+        double powerY = power * Math.sin(Math.toRadians(theta));
         loop.addObject(new Test(x_end,y_end,-powerX,-powerY, size));
     }
 
      public void EndCoordinates(){
-              x_end = Math.cos(Math.toRadians(theta)) * w + x;
-              y_end = Math.sin(Math.toRadians(theta)) * w + y;
+              x_end = Math.cos(Math.toRadians(theta)) * this.width + x;
+              y_end = Math.sin(Math.toRadians(theta)) * this.width + y;
      }
 }

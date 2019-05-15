@@ -10,7 +10,7 @@ public abstract class Bullet extends Element{
     public double vy;*/
     public int radius = 0;
 
-    public void update(){
+    public void update(int angle, int size, int power){
         x += vx;
         y += vy;
 
@@ -37,5 +37,6 @@ public abstract class Bullet extends Element{
     public Bullet(double x, double y, double vx, double vy){
         super(x, y, vx, vy);
     }
+
 
 }
