@@ -29,14 +29,6 @@ public class Cannon extends Element{
         power=2;
     }
 
-    public void set(int angle, int size, int power){
-        theta=angle;
-        this.power = power;
-        this.size = size;
-        this.height = size*1.5;
-        this.width = size*5;
-    }
-
     public void update(int angle, int size, int power){
         theta=angle;
         this.power = power;

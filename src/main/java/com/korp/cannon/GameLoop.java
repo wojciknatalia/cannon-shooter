@@ -22,14 +22,15 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     public final static int HEIGHT = 600;
 
     private CopyOnWriteArrayList<Element> objects = new CopyOnWriteArrayList<Element>();
-    //private Cannon cannon;
+    private Cannon cannon;
     private Slider angleSlider=new Slider(50,80,90,0,"Angle");
     private Slider sizeSlider=new Slider(50, 140, 0, 75, "Size");
     private Slider powerSlider=new Slider(50, 200, 10, 0, "Power");
 
     public GameLoop(){
         new Window(WIDTH, HEIGHT, "Cannon Shooter", this);
-        //cannon = new Cannon(100,500, 50, 10, this);  //od 0 do -90
+        cannon = new Cannon(100,500, 50, 10, this);  //od 0 do -90
+        addSlider();
         addCannon();
         addMouseListener(this);
         addMouseMotionListener(this);
@@ -37,8 +38,17 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     }
 
     private void addCannon(){
-        Element cannon = new Cannon(100,500, 50, 10, this);
+        //Element cannon = new Cannon(100,500, 50, 10, this);
         objects.add(cannon);
+    }
+
+    private void addSlider(){
+        addObject(angleSlider);
+        addObject(sizeSlider);
+        addObject(powerSlider);
+        //Slider angleSlider=new Slider(50,80,90,0,"Angle");
+        //Slider sizeSlider=new Slider(50, 140, 0, 75, "Size");
+        //Slider powerSlider=new Slider(50, 200, 10, 0, "Power");
     }
     private void shoot(){
         for(Element obj: objects)
@@ -107,15 +117,16 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         g.setColor(Color.pink);
         g.fillRect(0,0, WIDTH, HEIGHT);
 
-        //Sliders
-        angleSlider.render(g);
-        sizeSlider.render(g);
-        powerSlider.render(g);
 
         //Bullet
         for(Element obj: objects){
             obj.render(g);
         }
+
+        //Sliders
+        //angleSlider.render(g);
+        //izeSlider.render(g);
+        //powerSlider.render(g);
 
         //cannon.render(g);
 
