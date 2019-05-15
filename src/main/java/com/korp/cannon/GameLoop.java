@@ -19,9 +19,9 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     private boolean running = false;
     private final int FPS = 30;
     public final static int WIDTH = 800;
-    public final static int HEIGHT = 700;
+    public final static int HEIGHT = 600;
 
-    private CopyOnWriteArrayList<Bullet> objects = new CopyOnWriteArrayList<Bullet>();
+    private CopyOnWriteArrayList<Element> objects = new CopyOnWriteArrayList<Element>();
     private Cannon cannon;
     private Slider angleSlider=new Slider(50,80,90,0,"Angle");
     private Slider sizeSlider=new Slider(50, 140, 0, 75, "Size");
@@ -49,7 +49,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         objects.remove(obj);
     }
 
-    public void collideEffect(){
+    /*public void collideEffect(){
 	    for(Bullet A: objects){
 		    for(Bullet B: objects){
 			    if(A.equals(B)) continue;
@@ -76,13 +76,13 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 		    }
 	    }
 
-    }
+    }*/
 
     private void update(){
-        for(Bullet obj: objects){
+        for(Element obj: objects){
             obj.update();
         }
-        collideEffect();
+        //collideEffect();
         cannon.set(angleSlider.getVal(), sizeSlider.getVal(), powerSlider.getVal());
         cannon.update();
     }
@@ -101,7 +101,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         g.fillRect(0,0, WIDTH, HEIGHT);
 
         //Bullet
-        for(Bullet obj: objects){
+        for(Element obj: objects){
             obj.render(g);
         }
 

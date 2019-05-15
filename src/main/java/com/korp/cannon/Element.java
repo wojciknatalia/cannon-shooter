@@ -1,12 +1,14 @@
 package com.korp.cannon;
 
-public abstract class Element {
-    public double x;
-    public double y;
-    public double vx;
-    public double vy;
+import java.awt.*;
 
-    private void update(){};
-    
-    private void render(){};
+public abstract class Element {
+    //public double x;
+    //public double y;
+    //public double vx;
+    //public double vy;
+
+    public abstract void update();
+
+    public abstract void render(Graphics g);
 }

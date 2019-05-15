@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
-public class Cannon {
+public class Cannon extends Element{
 
     public double x;
     public double y;
@@ -56,7 +56,7 @@ public class Cannon {
         g2.rotate(Math.toRadians(theta),x,y);
         g2.fillRect((int) x, (int) y, (int)w, (int)h);
         EndCoordinates();
-        System.out.println(x);
+        //System.out.println(x);
     }
 
     public void setAngle(double angle){

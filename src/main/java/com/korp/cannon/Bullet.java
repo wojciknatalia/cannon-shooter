@@ -1,8 +1,9 @@
 package com.korp.cannon;
 
+import javax.lang.model.util.Elements;
 import java.awt.*;
 
-public abstract class Bullet {
+public abstract class Bullet extends Element{
     public double x;
     public double y;
     public double vx;
