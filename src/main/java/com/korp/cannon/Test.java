@@ -6,8 +6,12 @@ public class Test extends Bullet{
 
     public Test(double x, double y, double vx, double vy, int size){
         super(x, y, vx, vy);
-	radius = size;
+	    radius = size;
     }
+
+    @Override
+    public void shoot(){};
+
     @Override
     public void update() {
         super.update();

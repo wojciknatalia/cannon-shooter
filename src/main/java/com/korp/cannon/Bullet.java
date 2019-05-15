@@ -4,10 +4,10 @@ import javax.lang.model.util.Elements;
 import java.awt.*;
 
 public abstract class Bullet extends Element{
-    public double x;
+    /*public double x;
     public double y;
     public double vx;
-    public double vy;
+    public double vy;*/
     public int radius = 0;
 
     public void update(){
@@ -32,13 +32,10 @@ public abstract class Bullet extends Element{
         }
     }
 
-    public abstract void render(Graphics g);
+    //public abstract void render(Graphics g);
 
     public Bullet(double x, double y, double vx, double vy){
-        this.x = x;
-        this.y = y;
-        this.vx = vx;
-        this.vy = vy;
+        super(x, y, vx, vy);
     }
 
 }

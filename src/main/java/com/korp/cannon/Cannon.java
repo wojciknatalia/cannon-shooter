@@ -1,6 +1,8 @@
 package com.korp.cannon;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
@@ -14,7 +16,7 @@ public class Cannon extends Element{
     private int size;
     private int power;
 
-    public double x_end;  //!! muszą być double bo int'y dają silnie złe wyniki
+    public double x_end;
     public double y_end;
 
     private int diameter =20;
@@ -26,12 +28,14 @@ public class Cannon extends Element{
     private GameLoop loop;
 
     public Cannon(double x, double y, double width, double height, GameLoop loop) {
+        super(x,y,width,height,loop);
         this.x = x;
         this.y = y;
         w = width;
         h = height;
         this.loop = loop;
         power=2;
+        //theta = angle;
     }
 
     public void set(int angle, int size, int power){
@@ -72,5 +76,4 @@ public class Cannon extends Element{
               x_end = Math.cos(Math.toRadians(theta)) * w + x;
               y_end = Math.sin(Math.toRadians(theta)) * w + y;
      }
-
 }

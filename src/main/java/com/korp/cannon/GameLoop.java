@@ -14,7 +14,7 @@ import java.util.LinkedList;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class GameLoop extends Canvas implements MouseListener, MouseMotionListener, KeyListener {
+public class GameLoop extends Canvas implements MouseListener, MouseMotionListener, KeyListener  {
 
     private boolean running = false;
     private final int FPS = 30;
@@ -30,11 +30,21 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     public GameLoop(){
         new Window(WIDTH, HEIGHT, "Cannon Shooter", this);
         cannon = new Cannon(100,500, 50, 10, this);  //od 0 do -90
+        //addCannon();
         addMouseListener(this);
         addMouseMotionListener(this);
         addKeyListener(this);
     }
 
+    private void addCannon(){
+        Cannon cannon = new Cannon(100,500, 50, 10, this);
+        cannon.theta = -20;
+        objects.add(cannon);
+    }
+    private void shoot(){
+        for(Element obj: objects)
+            obj.shoot();
+    }
 
     public void run(){
         running = true;
@@ -186,6 +196,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     public void mouseReleased(MouseEvent e) {}
     @Override
     public void mousePressed(MouseEvent e) {}
+
     @Override
     public void keyTyped(KeyEvent e) {}
     @Override
