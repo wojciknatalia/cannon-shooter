@@ -9,13 +9,11 @@ public class Test extends Bullet{
 	    radius = size;
     }
 
-    @Override
-    public void shoot(){}
 
     @Override
-    public void update(int angle, int size, int power) {
-        super.update(angle, size, power);
-        vy += 0.1;
+    public void update() {
+        super.update();
+       vy += 0.1;
     }
 
 

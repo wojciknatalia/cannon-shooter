@@ -15,6 +15,9 @@ public class Cannon extends Element{
     public double x_end;
     public double y_end;
 
+
+    public double width;
+    public double height;
     private int diameter =20;
     private int buttonX = 105;
     private int buttonY = 350;
@@ -24,17 +27,14 @@ public class Cannon extends Element{
     private GameLoop loop;
 
     public Cannon(double x, double y, double width, double height, GameLoop loop) {
-        super(x,y,width,height,loop);
+        super(x,y);
+        this.width = width;
+        this.height = height;
         this.loop = loop;
         power=2;
     }
 
-    public void update(int angle, int size, int power){
-        theta=angle;
-        this.power = power;
-        this.size = size;
-        this.height = size*1.5;
-        this.width = size*5;
+    public void update(){
     }
 
     public void render(Graphics g) {
@@ -43,14 +43,21 @@ public class Cannon extends Element{
         if(theta  > 0)
             theta = 0;
         Graphics2D g2 = (Graphics2D)g;
+        AffineTransform old = g2.getTransform();
         g2.setColor(Color.black);
         g2.rotate(Math.toRadians(theta),x,y);
         g2.fillRect((int) x, (int) y, (int)this.width, (int)this.height);
+        g2.setTransform(old);
         EndCoordinates();
         //System.out.println(x);
     }
 
-    public void setAngle(double angle){
+    public void set(int angle, int size, int power){
+        theta=angle;
+        this.power = power;
+        this.size = size;
+        this.height = size*1.5;
+        this.width = size*5;
     }
 
     public void shoot(){

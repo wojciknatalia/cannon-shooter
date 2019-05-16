@@ -29,7 +29,6 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 
     public GameLoop(){
         new Window(WIDTH, HEIGHT, "Cannon Shooter", this);
-        cannon = new Cannon(100,500, 50, 10, this);  //od 0 do -90
         addSlider();
         addCannon();
         addMouseListener(this);
@@ -38,7 +37,8 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     }
 
     private void addCannon(){
-        //Element cannon = new Cannon(100,500, 50, 10, this);
+        cannon = new Cannon(100,500, 50, 10, this);  //od 0 do -90
+        cannon.set(angleSlider.getVal(), sizeSlider.getVal(), powerSlider.getVal());
         objects.add(cannon);
     }
 
@@ -49,10 +49,6 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         //Slider angleSlider=new Slider(50,80,90,0,"Angle");
         //Slider sizeSlider=new Slider(50, 140, 0, 75, "Size");
         //Slider powerSlider=new Slider(50, 200, 10, 0, "Power");
-    }
-    private void shoot(){
-        for(Element obj: objects)
-            obj.shoot();
     }
 
     public void run(){
@@ -68,9 +64,15 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         objects.remove(obj);
     }
 
-    /*public void collideEffect(){
-	    for(Bullet A: objects){
-		    for(Bullet B: objects){
+    public void collideEffect(){
+	    for(Element eA: objects){
+            if(eA.getClass() != Test.class)
+                continue;
+            Test A = (Test)eA;
+		    for(Element eB: objects){
+                if(eB.getClass() != Test.class)
+                    continue;
+                Test B = (Test)eB;
 			    if(A.equals(B)) continue;
 
 			    Vector2D vecA = new Vector2D(A.x, A.y);
@@ -94,13 +96,13 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 			    B.vy -= dist.getY()*mn/70;
 		    }
 	    }
-    }*/
+    }
 
     private void update(){
         for(Element obj: objects){
-            obj.update(angleSlider.getVal(), sizeSlider.getVal(), powerSlider.getVal());
+            obj.update();
         }
-        //collideEffect();
+        collideEffect();
         //cannon.update(angleSlider.getVal(), sizeSlider.getVal(), powerSlider.getVal());
     }
 
@@ -186,6 +188,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         dragging = true;
         cursorX = e.getX();
         cursorY = e.getY();
+        cannon.set(angleSlider.getVal(), sizeSlider.getVal(), powerSlider.getVal());
     }
 
     @Override
@@ -211,8 +214,7 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyChar()){
             case KeyEvent.VK_SPACE:
-                shoot();
-                //cannon.shoot();
+                cannon.shoot();
                 break;
         }
     }

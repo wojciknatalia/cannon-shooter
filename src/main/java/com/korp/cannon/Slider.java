@@ -55,9 +55,7 @@ public class Slider extends Element{
         return (int)((double)(sliderX+(sliderWidth/2))/(double)width*(double)(max-min));
     }
 
-    @Override
-    public void shoot() {}
 
     @Override
-    public void update(int angle, int size, int power) {}
+    public void update() {}
 }
