@@ -13,8 +13,7 @@ public class Test extends Bullet{
     @Override
     public void update() {
         super.update();
-        if(y != 0 && y != GameLoop.HEIGHT-radius)
-            Force.gravity(this);
+        Force.gravity(this);
     }
 
 

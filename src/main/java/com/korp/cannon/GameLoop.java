@@ -95,10 +95,10 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
 			    double dotB = vecB.dotProduct(dist);
 			    double mn = dotA - dotB;
 			    
-			    A.vx += dist.getX()*mn/70;
-			    A.vy += dist.getY()*mn/70;
-			    B.vx -= dist.getX()*mn/70;
-			    B.vy -= dist.getY()*mn/70;
+			    A.vx += dist.getX()*mn*(A.radius+B.radius)/Math.pow(A.radius,2);
+			    A.vy += dist.getY()*mn*(A.radius+B.radius)/Math.pow(A.radius,2);
+			    B.vx -= dist.getX()*mn*(A.radius+B.radius)/Math.pow(B.radius,2);
+			    B.vy -= dist.getY()*mn*(A.radius+B.radius)/Math.pow(B.radius,2);
 		    }
 	    }
     }
