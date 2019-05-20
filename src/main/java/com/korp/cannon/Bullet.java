@@ -9,23 +9,23 @@ public abstract class Bullet extends Element{
     public int radius = 0;
 
     public void update(){
-        x += vx;
-        y += vy;
+        x += vx * GameLoop.timeratio;
+        y += vy * GameLoop.timeratio;
 
         if(x<=0){
             x = 0;
             vx = -vx;
         }
-        else if(x>=GameLoop.WIDTH){
-            x = GameLoop.WIDTH;
+        else if(x>=GameLoop.WIDTH-radius){
+            x = GameLoop.WIDTH-radius;
             vx = -vx;
         }
         else if(y<=0){
             y = 0;
             vy = -vy;
         }
-        else if(y>=GameLoop.HEIGHT){
-            y = GameLoop.HEIGHT;
+        else if(y>=GameLoop.HEIGHT-radius){
+            y = GameLoop.HEIGHT-radius;
             vy = -vy;
         }
     }

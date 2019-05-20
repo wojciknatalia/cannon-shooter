@@ -48,7 +48,7 @@ public class Slider extends Element{
         g2.setColor(Color.BLACK);
         Font f = new Font("Monospaced", Font.PLAIN, 20);
         g2.setFont(f);
-        g2.drawString(label, (width / 2) - (sliderWidth / 2), (int)y - 12);
+        g2.drawString(label + " " + String.valueOf(getVal()), (width / 2) - (sliderWidth / 2), (int)y - 12);
     }
 
     public int getVal(){

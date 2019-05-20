@@ -17,18 +17,22 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class GameLoop extends Canvas implements MouseListener, MouseMotionListener, KeyListener  {
 
     private boolean running = false;
-    private final int FPS = 30;
+    public final static int FPS = 60;
+    public final static double pixtom = 10; //pixel to meter ratio
+    public final static double timeratio = (1.0 / FPS)*pixtom;
+
     public final static int WIDTH = 800;
     public final static int HEIGHT = 600;
+    public final static int OFFSET = 50;
 
     private CopyOnWriteArrayList<Element> objects = new CopyOnWriteArrayList<Element>();
     private Cannon cannon;
-    private Slider angleSlider=new Slider(50,80,90,0,"Angle");
-    private Slider sizeSlider=new Slider(50, 140, 0, 75, "Size");
-    private Slider powerSlider=new Slider(50, 200, 10, 0, "Power");
+    private Slider angleSlider=new Slider(50,80,90,0,"Angle:");
+    private Slider sizeSlider=new Slider(50, 140, 0, 75, "Size:");
+    private Slider powerSlider=new Slider(50, 200, 0, 30, "Vel_0:");
 
     public GameLoop(){
-        new Window(WIDTH, HEIGHT, "Cannon Shooter", this);
+        new Window(WIDTH, HEIGHT, OFFSET, "Cannon Shooter", this);
         addSlider();
         addCannon();
         addMouseListener(this);
@@ -46,9 +50,10 @@ public class GameLoop extends Canvas implements MouseListener, MouseMotionListen
         addObject(angleSlider);
         addObject(sizeSlider);
         addObject(powerSlider);
+        addObject(new Ruler(0, HEIGHT, WIDTH, OFFSET));
         //Slider angleSlider=new Slider(50,80,90,0,"Angle");
         //Slider sizeSlider=new Slider(50, 140, 0, 75, "Size");
-        //Slider powerSlider=new Slider(50, 200, 10, 0, "Power");
+        //Slider powerSlidernew Slider(50, 200, 10, 0, "Power");
     }
 
     public void run(){

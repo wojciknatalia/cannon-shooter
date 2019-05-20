@@ -63,7 +63,7 @@ public class Cannon extends Element{
     public void shoot(){
         double powerX = power * Math.cos(Math.toRadians(theta));
         double powerY = power * Math.sin(Math.toRadians(theta));
-        loop.addObject(new Test(x_end,y_end,-powerX,-powerY, size));
+        loop.addObject(new Test(x_end,y_end, powerX, powerY, size));
     }
 
      public void EndCoordinates(){
